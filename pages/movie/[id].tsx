@@ -51,7 +51,12 @@ const MovieDetailsPage: NextPage<MovieDetailsPageProps> = ({ movie, cast }) => {
   };
 
   return (
-    <Layout movieId={+id!} showNav={false}>
+    <Layout
+      movieId={+id!}
+      showNav={false}
+      title={movie.title}
+      description={movie.overview}
+    >
       <>
         <Link
           href="/"

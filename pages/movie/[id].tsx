@@ -27,6 +27,8 @@ const MovieDetailsPage: NextPage<MovieDetailsPageProps> = ({ movie, cast }) => {
 
   const getTrailer = async () => {
     const { data } = await movieDB.get(`/${id}/videos`);
+    console.log(data.results.find((video: any) => video.type === "Trailer"));
+
     setVideoKey(
       data.results.find((video: any) => video.type === "Trailer").key
     );
@@ -77,17 +79,8 @@ const MovieDetailsPage: NextPage<MovieDetailsPageProps> = ({ movie, cast }) => {
         </Link>
 
         {/* image */}
-        <div className="top-0 h-full w-full">
-          <div
-            style={{
-              height: "90vh",
-              width: "90%",
-              //alignItems to right
-              marginLeft: "auto",
-              clipPath: "polygon(0 0, 100% 0%, 100% 100%, 0 72%)",
-            }}
-            className="relative"
-          >
+        <div className="top-0 h-full w-full ">
+          <div className="relative xl:left-14 m-auto xl:w-[90%] xl:h-[90vh] md:h-[60vh] h-[35vh] mb-30 xl:mb-44">
             <Image
               src={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`}
               alt={movie?.title}
@@ -100,8 +93,8 @@ const MovieDetailsPage: NextPage<MovieDetailsPageProps> = ({ movie, cast }) => {
             <div className="h-[30vh] w-full absolute bottom-0 left-0 bg-gradient-to-t from-black to-transparent"></div>
           </div>
 
-          <div className="absolute bottom-0 left-20 w-2/4  md:w-3/4">
-            <div className="flex items-end">
+          <div className="xl:absolute xl:bottom-0  xl:left-20 xl:w-2/4 ">
+            <div className="flex flex-col justify-center items-center px-5 xl:flex-row xl:items-end">
               <MovieCard movie={movie} />
               {/* Movie title */}
               <div className="flex-grow flex-col justify-center ml-10 ">
@@ -140,26 +133,31 @@ const MovieDetailsPage: NextPage<MovieDetailsPageProps> = ({ movie, cast }) => {
                     {movie.overview}
                   </h3>
                 </div>
-                {/* <div className="my-10 absolute">
-                  <Modal> */}
-
-                {/* </Modal>
-                </div> */}
               </div>
             </div>
           </div>
         </div>
         <div
           style={{
-            paddingTop: 160,
             width: "80%",
+            height: "100%",
             margin: "auto",
+            display: "flex",
+            justifyContent: "center",
           }}
         >
+          {/* <iframe
+            src="https://www.youtube.com/embed/o5F8MOz_IDw"
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            width={"100%"}
+            height={"100%"} // 16:9
+          ></iframe> */}
           <YouTube
             videoId={videoKey}
             opts={opts}
-            className="[&_iframe]:w-full [&_iframe]:h-full [&_iframe]:aspect-video h-[80vh]"
+            className="[&_iframe]:w-full [&_iframe]:h-full [&_iframe]:aspect-video h-[30vh] xl:h-[70vh]"
           />
         </div>
 
